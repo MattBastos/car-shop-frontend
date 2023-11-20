@@ -4,7 +4,7 @@ export const Container = tw.header`
   fixed
   z-40
   flex
-  h-16
+  h-20
   w-full
   items-center
   justify-center
