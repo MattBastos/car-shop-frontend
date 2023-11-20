@@ -5,6 +5,8 @@ import tw from 'tailwind-styled-components';
 
 export const Container = tw.figure`
   m-2
+  h-24
+  w-24
   flex
   items-center
   justify-center

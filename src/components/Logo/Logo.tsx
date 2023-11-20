@@ -4,7 +4,7 @@ import * as S from './styles';
 
 export const Logo = () => {
   return (
-    <S.Container className="h-24 w-24">
+    <S.Container>
       <Link href="/">
         <S.Logo
           src="/assets/images/logo/logo.png"
