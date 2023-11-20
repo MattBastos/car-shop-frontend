@@ -9,7 +9,11 @@ type LayoutProps = {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="pt-br" className="scroll-smooth">
-      <body className="flex min-h-screen flex-col bg-slate-800">
+      <head>
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+      </head>
+
+      <body className="flex min-h-screen flex-col bg-background">
         <Header />
 
         <Layout>
