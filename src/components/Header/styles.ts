@@ -8,6 +8,9 @@ export const Container = tw.header`
   w-full
   items-center
   justify-center
-  bg-gray-200
+  bg-gradient-to-r
+  from-black
+  via-indigo-700
+  to-blue-500
   shadow-xl
 `;
