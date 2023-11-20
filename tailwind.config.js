@@ -24,6 +24,11 @@ module.exports = {
       fontFamily: {
         permanent: ['Permanent Marker', 'cursive'],
         foldit: ['Foldit', 'cursive']
+      },
+      colors: {
+        primary: '#3533CD',
+        secondary: '#1B1A69',
+        background: '#000001'
       }
     }
   },
