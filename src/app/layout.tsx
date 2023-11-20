@@ -1,13 +1,17 @@
+import { Header } from '@/components/Header';
 import { Layout } from '@/components/Layout';
+import '@/styles/globals.css';
 
-export default function RootLayout({
-  children
-}: {
+type LayoutProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="flex min-h-screen flex-col bg-gray-500">
+    <html lang="pt-br" className="scroll-smooth">
+      <body className="flex min-h-screen flex-col bg-gray-200">
+        <Header />
+
         <Layout>
           <section className="pb-10 pt-20">{children}</section>
         </Layout>
