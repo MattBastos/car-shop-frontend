@@ -3,8 +3,10 @@ import tw from 'tailwind-styled-components';
 
 export const Container = tw(Link)`
   flex
-  h-60
-  w-60
+  h-48
+  w-48
+  md:h-60
+  md:w-60
   flex-col
   items-center
   justify-center
@@ -26,6 +28,7 @@ export const IconContainer = tw.section`
 `;
 
 export const Title = tw.h2`
-  text-xl
+  text-lg
+  md:text-xl
   font-bold
 `;
