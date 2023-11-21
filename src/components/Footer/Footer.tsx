@@ -29,7 +29,7 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <LinkedinLogo size={22} color="white" weight="duotone" />
+              <LinkedinLogo size={22} weight="duotone" />
 
               <S.LinkTitle>Linkedin</S.LinkTitle>
             </S.Link>
@@ -39,7 +39,7 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <GithubLogo size={22} color="white" weight="duotone" />
+              <GithubLogo size={22} weight="duotone" />
 
               <S.LinkTitle>Github</S.LinkTitle>
             </S.Link>
@@ -51,13 +51,13 @@ export const Footer = () => {
 
           <S.List>
             <S.Link href="cars">
-              <CarProfile size={22} color="white" weight="duotone" />
+              <CarProfile size={22} weight="duotone" />
 
               <S.LinkTitle>Carros</S.LinkTitle>
             </S.Link>
 
             <S.Link href="motorcycles">
-              <Motorcycle size={22} color="white" weight="duotone" />
+              <Motorcycle size={22} weight="duotone" />
 
               <S.LinkTitle>Motos</S.LinkTitle>
             </S.Link>

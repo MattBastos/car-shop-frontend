@@ -63,12 +63,17 @@ export const Link = tw(NextLink)`
   items-center
   justify-center
   gap-1
+  text-gray-200
+  transition-colors
+  duration-300
+  ease-in-out
+  hover:text-blue-500
+  hover:underline
 `;
 
 export const LinkTitle = tw.h3`
   text-lg
   font-bold
-  text-gray-200
 `;
 
 export const CopyrightContainer = tw.section`
