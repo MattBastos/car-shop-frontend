@@ -4,7 +4,6 @@ import tw from 'tailwind-styled-components';
 export const Container = tw.footer`
   w-full
   mt-auto
-  pt-6
   flex
   flex-col
   items-center
@@ -13,7 +12,7 @@ export const Container = tw.footer`
 `;
 
 export const SeparatorLine = tw.hr`
-  my-10
+  my-5
   border-t
   border-gray-200
   w-11/12
