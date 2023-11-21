@@ -21,10 +21,14 @@ export const SeparatorLine = tw.hr`
 
 export const Content = tw.section`
   flex
+  flex-col
+  md:flex-row
   w-full
   lg:w-6/12
-  items-start
-  justify-around
+  items-center
+  justify-center
+  md:items-start
+  md:justify-around
   flex-wrap
   gap-10
   pb-10
