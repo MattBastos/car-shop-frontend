@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { ReactElement } from 'react';
+
+import * as S from './styles';
 
 type SectionCardProps = {
   icon: ReactElement;
@@ -11,13 +12,10 @@ type SectionCardProps = {
 
 export const SectionCard = ({ icon, title, href }: SectionCardProps) => {
   return (
-    <Link
-      href={href}
-      className="h-60 w-60 rounded-lg bg-gray-200 shadow-lg transition-transform ease-in-out hover:scale-105"
-    >
-      <section>{icon}</section>
+    <S.Container href={href}>
+      <S.IconContainer>{icon}</S.IconContainer>
 
-      <h2>{title}</h2>
-    </Link>
+      <S.Title>{title}</S.Title>
+    </S.Container>
   );
 };
