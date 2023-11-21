@@ -1,3 +1,4 @@
+import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Layout } from '@/components/Layout';
 import '@/styles/globals.css';
@@ -19,6 +20,8 @@ export default function RootLayout({ children }: LayoutProps) {
         <Layout>
           <section className="pb-10 pt-20">{children}</section>
         </Layout>
+
+        <Footer />
       </body>
     </html>
   );
