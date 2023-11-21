@@ -1,4 +1,9 @@
-import { GithubLogo, LinkedinLogo } from '@/components/Icons';
+import {
+  CarProfile,
+  GithubLogo,
+  LinkedinLogo,
+  Motorcycle
+} from '@/components/Icons';
 import { Logo } from '@/components/Logo';
 
 import * as S from './styles';
@@ -43,6 +48,20 @@ export const Footer = () => {
 
         <S.Section>
           <S.Title>Mapa do Site</S.Title>
+
+          <S.List>
+            <S.Link href="cars">
+              <CarProfile size={22} color="white" weight="duotone" />
+
+              <S.LinkTitle>Carros</S.LinkTitle>
+            </S.Link>
+
+            <S.Link href="motorcycles">
+              <Motorcycle size={22} color="white" weight="duotone" />
+
+              <S.LinkTitle>Motos</S.LinkTitle>
+            </S.Link>
+          </S.List>
         </S.Section>
       </S.Content>
 
