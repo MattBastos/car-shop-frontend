@@ -1,3 +1,8 @@
 'use client';
 
-export { CarProfile, Motorcycle } from '@phosphor-icons/react';
+export {
+  CarProfile,
+  Motorcycle,
+  GithubLogo,
+  LinkedinLogo
+} from '@phosphor-icons/react';
