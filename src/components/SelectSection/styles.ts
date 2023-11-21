@@ -4,7 +4,7 @@ export const Container = tw.section`
   flex
   flex-col
   md:flex-row
-  min-h-screen
+  h-full
   w-full
   items-center
   justify-center

@@ -17,9 +17,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <body className="flex min-h-screen flex-col bg-background">
         <Header />
 
-        <Layout>
-          <section className="pb-10 pt-20">{children}</section>
-        </Layout>
+        <Layout>{children}</Layout>
 
         <Footer />
       </body>
