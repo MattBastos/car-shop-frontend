@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import tw from 'tailwind-styled-components';
 
 export const Container = tw.footer`
@@ -45,6 +46,27 @@ export const Section = tw.section`
 
 export const Title = tw.p`
   text-xl
+  font-bold
+  text-gray-200
+`;
+
+export const List = tw.ul`
+  flex
+  flex-col
+  items-start
+  justify-center
+  gap-2
+`;
+
+export const Link = tw(NextLink)`
+  flex
+  items-center
+  justify-center
+  gap-1
+`;
+
+export const LinkTitle = tw.h3`
+  text-lg
   font-bold
   text-gray-200
 `;

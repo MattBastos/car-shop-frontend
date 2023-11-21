@@ -1,3 +1,4 @@
+import { GithubLogo, LinkedinLogo } from '@/components/Icons';
 import { Logo } from '@/components/Logo';
 
 import * as S from './styles';
@@ -16,6 +17,28 @@ export const Footer = () => {
 
         <S.Section>
           <S.Title>Mídias Sociais</S.Title>
+
+          <S.List>
+            <S.Link
+              href="https://www.linkedin.com/in/matthewsbastos/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinLogo size={22} color="white" weight="duotone" />
+
+              <S.LinkTitle>Linkedin</S.LinkTitle>
+            </S.Link>
+
+            <S.Link
+              href="https://github.com/MattBastos"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubLogo size={22} color="white" weight="duotone" />
+
+              <S.LinkTitle>Github</S.LinkTitle>
+            </S.Link>
+          </S.List>
         </S.Section>
 
         <S.Section>
