@@ -3,7 +3,7 @@
 import { getCars } from '@/api/cars';
 import { useState, useEffect } from 'react';
 
-export const VhicleTable = () => {
+export const VehicleTable = () => {
   const [carsData, setCarsData] = useState<Car[]>([]);
 
   useEffect(() => {

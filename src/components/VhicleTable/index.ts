@@ -1,1 +1,0 @@
-export { VhicleTable } from './VhicleTable';
