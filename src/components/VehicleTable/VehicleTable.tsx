@@ -1,6 +1,7 @@
 'use client';
 
 import { getCars } from '@/api/cars';
+import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 export const VehicleTable = () => {
