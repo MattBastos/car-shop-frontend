@@ -1,0 +1,1 @@
+export { VhicleTable } from './VhicleTable';

@@ -1,8 +1,3 @@
-'use client';
-
-import { getCars } from '@/api/cars';
-import { useState, useEffect } from 'react';
-
 interface Car {
   id: string;
   model: string;
@@ -15,20 +10,6 @@ interface Car {
 }
 
 export default function Cars() {
-  const [carsData, setCarsData] = useState<Car[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCars();
-      if (data) {
-        setCarsData(data);
-        console.log(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <section>
       <h1 className="text-white">Carros</h1>
