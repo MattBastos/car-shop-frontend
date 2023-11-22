@@ -31,9 +31,7 @@ export default function Cars() {
 
   return (
     <section>
-      {carsData.map((car) => (
-        <h1 key={car.id}>{car.model}</h1>
-      ))}
+      <h1 className="text-white">Carros</h1>
     </section>
   );
 }
