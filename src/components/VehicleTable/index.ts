@@ -1,1 +1,0 @@
-export { VehicleTable } from './VehicleTable';
