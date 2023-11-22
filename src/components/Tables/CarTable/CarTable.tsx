@@ -62,7 +62,7 @@ export const CarTable = () => {
                 <td className="flex gap-4 px-4 py-2">
                   <button
                     onClick={onUpdate}
-                    className="rounded-lg border bg-yellow-500 px-2 py-1 text-white transition-colors ease-in-out hover:bg-yellow-600"
+                    className="rounded-lg border bg-blue-500 px-2 py-1 text-white transition-colors duration-200 ease-in-out hover:bg-blue-600"
                   >
                     Editar
                   </button>
