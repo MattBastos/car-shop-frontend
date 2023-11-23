@@ -11,7 +11,7 @@ export const getCars = async () => {
 
 export const deleteCar = async (carId: string) => {
   try {
-    const { status } = await axiosInstance.delete(`${carId}`);
+    const { status } = await axiosInstance.delete(`cars/${carId}`);
     if (status === 200) {
       return 'Carro deletado com sucesso!';
     }
