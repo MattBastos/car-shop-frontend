@@ -1,6 +1,6 @@
 'use client';
 
-import { getCars } from '@/api/cars';
+import { getCars, deleteCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
@@ -9,6 +9,10 @@ import * as S from './styles';
 
 export const CarTable = () => {
   const [carsData, setCarsData] = useState<Car[]>([]);
+  const [feedbackMessage, setFeedbackMessage] = useState<string | undefined>(
+    ''
+  );
+
   const tableHeaders = [
     'Modelo',
     'Ano',
@@ -20,16 +24,21 @@ export const CarTable = () => {
     'Ações'
   ];
 
-  const onDelete = () => {};
+  const fetchData = async () => {
+    const data = await getCars();
+    if (data) setCarsData(data);
+  };
+
+  const onDelete = async (carId: string) => {
+    const deleteCarMessage = await deleteCar(carId);
+    setFeedbackMessage(deleteCarMessage);
+
+    await fetchData();
+  };
 
   const onUpdate = () => {};
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCars();
-      if (data) setCarsData(data);
-    };
-
     fetchData();
   }, []);
 
@@ -68,9 +77,17 @@ export const CarTable = () => {
               <S.TD>{car.seatsQty}</S.TD>
 
               <S.TDActions>
-                <TableButton onClick={onUpdate} title="Editar" color="blue" />
+                <TableButton
+                  onClick={() => onUpdate()}
+                  title="Editar"
+                  color="blue"
+                />
 
-                <TableButton onClick={onDelete} title="Deletar" color="red" />
+                <TableButton
+                  onClick={() => onDelete(car.id)}
+                  title="Deletar"
+                  color="red"
+                />
               </S.TDActions>
             </S.TBodyRow>
           ))}

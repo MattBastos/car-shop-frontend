@@ -9,7 +9,7 @@ type TableButtonType = {
 export const TableButton = ({ onClick, title, color }: TableButtonType) => {
   return (
     <S.Button
-      onClick={onClick}
+      onClick={() => onClick()}
       type="button"
       role="button"
       title={title}
