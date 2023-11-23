@@ -67,13 +67,3 @@ export const TDActions = tw.td`
   py-2
   md:px-4
 `;
-
-export const TButton = tw.button`
-  rounded-lg
-  px-2
-  py-1
-  text-white
-  transition-colors
-  duration-200
-  ease-in-out 
-`;

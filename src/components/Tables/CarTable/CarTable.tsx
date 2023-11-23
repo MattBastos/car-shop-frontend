@@ -4,6 +4,7 @@ import { getCars } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
+import { TableButton } from '../TableButton';
 import * as S from './styles';
 
 export const CarTable = () => {
@@ -67,19 +68,9 @@ export const CarTable = () => {
               <S.TD>{car.seatsQty}</S.TD>
 
               <S.TDActions>
-                <S.TButton
-                  onClick={onUpdate}
-                  className="bg-blue-500 hover:bg-blue-600"
-                >
-                  Editar
-                </S.TButton>
+                <TableButton onClick={onUpdate} title="Editar" color="blue" />
 
-                <S.TButton
-                  onClick={onDelete}
-                  className="bg-red-500 hover:bg-red-600"
-                >
-                  Deletar
-                </S.TButton>
+                <TableButton onClick={onDelete} title="Deletar" color="red" />
               </S.TDActions>
             </S.TBodyRow>
           ))}
