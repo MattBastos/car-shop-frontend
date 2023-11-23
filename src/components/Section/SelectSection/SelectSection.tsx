@@ -1,5 +1,5 @@
 import { CarProfile, Motorcycle } from '@/components/Icons';
-import { SectionCard } from '@/components/SectionCard';
+import { SectionCard } from '@/components/Section';
 
 import * as S from './styles';
 
