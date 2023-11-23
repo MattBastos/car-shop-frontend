@@ -8,3 +8,14 @@ export const getCars = async () => {
     console.error('Error fetching data:', error);
   }
 };
+
+export const deleteCar = async (carId: string) => {
+  try {
+    const { status } = await axiosInstance.delete(`${carId}`);
+    if (status === 200) {
+      return 'Carro deletado com sucesso!';
+    }
+  } catch (error) {
+    `Erro ao deletar carro:, ${error}`;
+  }
+};
