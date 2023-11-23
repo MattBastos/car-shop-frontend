@@ -43,7 +43,7 @@ export const CarTable = () => {
               <thead className="bg-primary text-base uppercase text-gray-200">
                 <tr>
                   {tableHeaders.map((th) => (
-                    <th scope="col" key={th} className="px-2 py-3">
+                    <th scope="col" key={th} className="px-4 py-3">
                       {th}
                     </th>
                   ))}
@@ -56,22 +56,22 @@ export const CarTable = () => {
                     key={car.id}
                     className="border-b border-gray-400 transition-colors ease-in-out hover:bg-gray-300"
                   >
-                    <td className="px-3 py-2">{car.model}</td>
-                    <td className="px-3 py-2">{car.year}</td>
-                    <td className="px-3 py-2">{car.color}</td>
+                    <td className="px-4 py-2">{car.model}</td>
+                    <td className="px-4 py-2">{car.year}</td>
+                    <td className="px-4 py-2">{car.color}</td>
                     <td
                       className={
                         car.status
-                          ? 'px-3 py-2 text-green-700'
-                          : 'px-3 py-2 text-red-700'
+                          ? 'px-3 py-4 text-green-700'
+                          : 'px-3 py-4 text-red-700'
                       }
                     >
                       {car.status ? 'Disponível' : 'Não Disponível'}
                     </td>
-                    <td className="px-3 py-2">{car.buyValue}</td>
-                    <td className="px-3 py-2">{car.doorsQty}</td>
-                    <td className="px-3 py-2">{car.seatsQty}</td>
-                    <td className="flex gap-4 px-3 py-2">
+                    <td className="px-4 py-2">{car.buyValue}</td>
+                    <td className="px-4 py-2">{car.doorsQty}</td>
+                    <td className="px-4 py-2">{car.seatsQty}</td>
+                    <td className="flex gap-4 px-4 py-2">
                       <button
                         onClick={onUpdate}
                         className="rounded-lg bg-blue-500 px-2 py-1 text-white transition-colors duration-200 ease-in-out hover:bg-blue-600"
