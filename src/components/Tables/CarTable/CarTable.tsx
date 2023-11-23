@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 export const CarTable = () => {
   const [carsData, setCarsData] = useState<Car[]>([]);
   const tableHeaders = [
-    'ID',
     'Modelo',
     'Ano',
     'Cor',
@@ -57,7 +56,6 @@ export const CarTable = () => {
                     key={car.id}
                     className="border-b border-gray-400 transition-colors ease-in-out hover:bg-gray-300"
                   >
-                    <td className="px-3 py-2">{car.id}</td>
                     <td className="px-3 py-2">{car.model}</td>
                     <td className="px-3 py-2">{car.year}</td>
                     <td className="px-3 py-2">{car.color}</td>
