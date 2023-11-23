@@ -33,8 +33,8 @@ export const CarTable = () => {
   return carsData.length === 0 ? (
     <p>Nenhum carro encontrado!</p>
   ) : (
-    <section className="relative w-full overflow-x-auto rounded-xl">
-      <table className="w-full table-auto border-collapse border-spacing-0 rounded-xl bg-gray-200 text-center">
+    <section className="relative w-full overflow-x-auto rounded-t-xl">
+      <table className="w-full table-auto border-collapse border-spacing-0 rounded-t-xl bg-gray-200 text-center">
         <thead className="bg-primary text-sm uppercase text-gray-200 md:text-base lg:text-lg">
           <tr>
             {tableHeaders.map((th) => (
