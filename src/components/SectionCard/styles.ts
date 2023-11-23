@@ -13,9 +13,6 @@ export const Container = tw(Link)`
   rounded-lg
   bg-gray-200
   shadow-lg
-  transition-transform
-  ease-in-out
-  hover:scale-105
 `;
 
 export const IconContainer = tw.section`
@@ -24,6 +21,9 @@ export const IconContainer = tw.section`
   w-full
   items-center
   justify-center
+  transition-colors
+  ease-in-out
+  duration-300
   hover:bg-gray-300
 `;
 
