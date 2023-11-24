@@ -9,6 +9,7 @@ export const Container = tw.section`
 
 export const NoCarMessage = tw.h2`
   text-xl
+  text-center
   font-bold
   text-gray-100
 `;
