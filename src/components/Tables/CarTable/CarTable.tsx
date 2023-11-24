@@ -9,8 +9,18 @@ import { TableButton } from '../TableButton';
 import * as S from './styles';
 
 export const CarTable = () => {
-  const [carsData, setCarsData] = useState<Car[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [carsData, setCarsData] = useState<Car[]>([]);
+  const [selectedCarData, setSelectedCarData] = useState<Car>({
+    id: '',
+    model: '',
+    year: 0,
+    color: '',
+    status: false,
+    buyValue: 0,
+    doorsQty: 0,
+    seatsQty: 0
+  });
 
   const tableHeaders = [
     'Modelo',
@@ -28,14 +38,25 @@ export const CarTable = () => {
     if (data) setCarsData(data);
   };
 
-  const onDelete = async (carId: string) => {
-    await deleteCar(carId);
+  const onDelete = async () => {
+    await deleteCar(selectedCarData.id);
+    setIsModalOpen(false);
+
     await fetchData();
   };
 
   const onUpdate = () => {};
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = (carId: string, carModel: string, carYear: number) => {
+    setSelectedCarData((prevState) => ({
+      ...prevState,
+      id: carId,
+      model: carModel,
+      year: carYear
+    }));
+
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => setIsModalOpen(false);
 
@@ -46,17 +67,15 @@ export const CarTable = () => {
   return (
     <S.Container>
       <DeleteConfirmationModal
-        onDelete={() => onDelete('aaa')}
+        onDelete={onDelete}
         closeModal={closeModal}
-        carModel="Modelo"
-        carYear={1990}
+        carModel={selectedCarData.model}
+        carYear={selectedCarData.year}
         isModalOpen={isModalOpen}
       />
 
       {carsData.length === 0 ? (
-        <section>
-          <S.NoCarMessage>Nenhum carro encontrado!</S.NoCarMessage>
-        </section>
+        <S.NoCarMessage>Nenhum carro encontrado!</S.NoCarMessage>
       ) : (
         <S.Table>
           <S.THead>
@@ -98,7 +117,7 @@ export const CarTable = () => {
                   />
 
                   <TableButton
-                    onClick={openModal}
+                    onClick={() => openModal(car.id, car.model, car.year)}
                     title="Deletar"
                     color="red"
                   />
