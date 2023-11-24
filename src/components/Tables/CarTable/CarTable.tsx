@@ -9,9 +9,6 @@ import * as S from './styles';
 
 export const CarTable = () => {
   const [carsData, setCarsData] = useState<Car[]>([]);
-  const [feedbackMessage, setFeedbackMessage] = useState<string | undefined>(
-    ''
-  );
 
   const tableHeaders = [
     'Modelo',
@@ -30,9 +27,7 @@ export const CarTable = () => {
   };
 
   const onDelete = async (carId: string) => {
-    const deleteCarMessage = await deleteCar(carId);
-    setFeedbackMessage(deleteCarMessage);
-
+    await deleteCar(carId);
     await fetchData();
   };
 
