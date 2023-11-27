@@ -1,16 +1,20 @@
 'use client';
 
-import { getCars, deleteCar } from '@/api/cars';
+import { getCars, deleteCar, editCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 import { DeleteConfirmationModal } from '../DeleteConfirmationModal';
+import { EditCarForm } from '../EditCarForm';
 import { TableButton } from '../TableButton';
 import * as S from './styles';
 
 export const CarTable = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditCarFormOpen, setIsEditCarFormOpen] = useState(false);
+
   const [carsData, setCarsData] = useState<Car[]>([]);
+
   const [selectedCarData, setSelectedCarData] = useState<Car>({
     id: '',
     model: '',
@@ -40,14 +44,23 @@ export const CarTable = () => {
 
   const onDelete = async () => {
     await deleteCar(selectedCarData.id);
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
 
     await fetchData();
   };
 
-  const onUpdate = () => {};
+  const onUpdate = async () => {
+    await editCar(selectedCarData);
+    setIsEditCarFormOpen(false);
 
-  const openModal = (carId: string, carModel: string, carYear: number) => {
+    await fetchData();
+  };
+
+  const openDeleteModal = (
+    carId: string,
+    carModel: string,
+    carYear: number
+  ) => {
     setSelectedCarData((prevState) => ({
       ...prevState,
       id: carId,
@@ -55,10 +68,31 @@ export const CarTable = () => {
       year: carYear
     }));
 
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+
+  const openEditCarForm = (carData: Car) => {
+    setSelectedCarData(() => ({
+      ...carData
+    }));
+
+    setIsEditCarFormOpen(true);
+  };
+
+  const closeEditCarForm = () => setIsEditCarFormOpen(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setSelectedCarData((prevData) => ({
+      ...prevData,
+      [name]: name === 'status' ? value === 'true' : value
+    }));
+  };
 
   useEffect(() => {
     fetchData();
@@ -68,10 +102,18 @@ export const CarTable = () => {
     <S.Container>
       <DeleteConfirmationModal
         onDelete={onDelete}
-        closeModal={closeModal}
+        closeModal={closeDeleteModal}
         carModel={selectedCarData.model}
         carYear={selectedCarData.year}
-        isModalOpen={isModalOpen}
+        isModalOpen={isDeleteModalOpen}
+      />
+
+      <EditCarForm
+        carData={selectedCarData}
+        onUpdate={onUpdate}
+        handleInputChange={handleInputChange}
+        closeForm={closeEditCarForm}
+        isFormOpen={isEditCarFormOpen}
       />
 
       {carsData.length === 0 ? (
@@ -111,13 +153,13 @@ export const CarTable = () => {
 
                 <S.TDActions>
                   <TableButton
-                    onClick={() => onUpdate()}
+                    onClick={() => openEditCarForm(car)}
                     title="Editar"
                     color="blue"
                   />
 
                   <TableButton
-                    onClick={() => openModal(car.id, car.model, car.year)}
+                    onClick={() => openDeleteModal(car.id, car.model, car.year)}
                     title="Deletar"
                     color="red"
                   />

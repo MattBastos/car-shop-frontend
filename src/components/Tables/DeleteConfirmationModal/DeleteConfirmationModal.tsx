@@ -28,7 +28,14 @@ export const DeleteConfirmationModal = ({
         <S.TitleContainer>
           <S.Title>Confirme sua Ação</S.Title>
 
-          <S.CloseModalButton onClick={closeModal}>
+          <S.CloseModalButton
+            onClick={closeModal}
+            type="button"
+            role="button"
+            title="Fechar"
+            tabIndex={0}
+            aria-label="Fechar"
+          >
             <X size={20} color="gray" weight="bold" />
           </S.CloseModalButton>
         </S.TitleContainer>
@@ -40,9 +47,9 @@ export const DeleteConfirmationModal = ({
         </S.Text>
 
         <S.ButtonsContainer>
-          <TableButton onClick={() => onDelete()} title="Sim" color="red" />
+          <TableButton onClick={() => onDelete()} title="Deletar" color="red" />
 
-          <TableButton onClick={closeModal} title="Não" color="gray" />
+          <TableButton onClick={closeModal} title="Cancelar" color="gray" />
         </S.ButtonsContainer>
       </S.Container>
     </>

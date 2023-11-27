@@ -1,3 +1,5 @@
+import { Car } from '@/types';
+
 import { axiosInstance } from './axiosConfig';
 
 export const getCars = async () => {
@@ -5,7 +7,7 @@ export const getCars = async () => {
     const { data } = await axiosInstance.get('cars');
     if (data) return data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error(`Erro ao buscar dados dos carros: ${error}`);
   }
 };
 
@@ -16,6 +18,17 @@ export const deleteCar = async (carId: string) => {
       return 'Carro deletado com sucesso!';
     }
   } catch (error) {
-    `Erro ao deletar carro:, ${error}`;
+    `Erro ao deletar carro: ${error}`;
+  }
+};
+
+export const editCar = async ({ id, ...carData }: Car) => {
+  try {
+    const { status } = await axiosInstance.put(`cars/${id}`, carData);
+    if (status === 200) {
+      return 'Carro editado com sucesso!';
+    }
+  } catch (error) {
+    `Erro ao editar carro: ${error}`;
   }
 };
