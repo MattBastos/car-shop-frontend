@@ -12,7 +12,9 @@ import * as S from './styles';
 export const CarTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditCarFormOpen, setIsEditCarFormOpen] = useState(false);
+
   const [carsData, setCarsData] = useState<Car[]>([]);
+
   const [selectedCarData, setSelectedCarData] = useState<Car>({
     id: '',
     model: '',
@@ -95,9 +97,10 @@ export const CarTable = () => {
       />
 
       <EditCarForm
-        onUpdate={onUpdate}
-        closeForm={closeEditCarForm}
         carData={selectedCarData}
+        onUpdate={onUpdate}
+        updateCarData={setSelectedCarData}
+        closeForm={closeEditCarForm}
         isFormOpen={isEditCarFormOpen}
       />
 
