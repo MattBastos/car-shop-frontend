@@ -1,3 +1,5 @@
+import { Car } from '@/types';
+
 import { axiosInstance } from './axiosConfig';
 
 export const getCars = async () => {
@@ -20,9 +22,9 @@ export const deleteCar = async (carId: string) => {
   }
 };
 
-export const editCar = async (carId: string) => {
+export const editCar = async ({ id, ...carData }: Car) => {
   try {
-    const { status } = await axiosInstance.put(`cars/${carId}`);
+    const { status } = await axiosInstance.put(`cars/${id}`, carData);
     if (status === 200) {
       return 'Carro editado com sucesso!';
     }

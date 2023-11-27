@@ -1,6 +1,6 @@
 'use client';
 
-import { getCars, deleteCar } from '@/api/cars';
+import { getCars, deleteCar, editCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
@@ -45,9 +45,18 @@ export const CarTable = () => {
     await fetchData();
   };
 
-  const onUpdate = () => {};
+  const onUpdate = async () => {
+    await editCar(selectedCarData);
+    setIsModalOpen(false);
 
-  const openModal = (carId: string, carModel: string, carYear: number) => {
+    await fetchData();
+  };
+
+  const openDeleteConfirmationModal = (
+    carId: string,
+    carModel: string,
+    carYear: number
+  ) => {
     setSelectedCarData((prevState) => ({
       ...prevState,
       id: carId,
@@ -117,7 +126,9 @@ export const CarTable = () => {
                   />
 
                   <TableButton
-                    onClick={() => openModal(car.id, car.model, car.year)}
+                    onClick={() =>
+                      openDeleteConfirmationModal(car.id, car.model, car.year)
+                    }
                     title="Deletar"
                     color="red"
                   />
