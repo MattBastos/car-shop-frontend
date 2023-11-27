@@ -51,6 +51,7 @@ export const CarTable = () => {
 
   const onUpdate = async () => {
     await editCar(selectedCarData);
+    setIsEditCarFormOpen(false);
 
     await fetchData();
   };
@@ -82,6 +83,14 @@ export const CarTable = () => {
 
   const closeEditCarForm = () => setIsEditCarFormOpen(false);
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setSelectedCarData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -99,7 +108,7 @@ export const CarTable = () => {
       <EditCarForm
         carData={selectedCarData}
         onUpdate={onUpdate}
-        updateCarData={setSelectedCarData}
+        handleInputChange={handleInputChange}
         closeForm={closeEditCarForm}
         isFormOpen={isEditCarFormOpen}
       />

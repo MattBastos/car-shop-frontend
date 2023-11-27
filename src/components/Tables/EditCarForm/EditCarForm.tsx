@@ -1,6 +1,5 @@
 import { X } from '@/components/Icons';
 import { Car } from '@/types';
-import { Dispatch, SetStateAction } from 'react';
 
 import { TableButton } from '../TableButton';
 import * as S from './styles';
@@ -9,14 +8,17 @@ type EditCarFormProps = {
   carData: Car;
   onUpdate: () => void;
   closeForm: () => void;
-  updateCarData: () => Dispatch<SetStateAction<Car>>;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   isFormOpen: boolean;
 };
 
 export const EditCarForm = ({
   carData,
-  onClick,
+  onUpdate,
   closeForm,
+  handleInputChange,
   isFormOpen
 }: EditCarFormProps) => {
   return (
@@ -48,22 +50,41 @@ export const EditCarForm = ({
         <form className="mb-6 flex flex-col gap-2 text-lg">
           <label>
             Modelo:
-            <input type="text" name="model" value={carData.model} />
+            <input
+              type="text"
+              name="model"
+              value={carData.model}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
 
           <label>
             Ano:
-            <input type="number" name="year" value={carData.year} />
+            <input
+              type="number"
+              name="year"
+              value={carData.year}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
 
           <label>
             Cor:
-            <input type="text" name="color" value={carData.color} />
+            <input
+              type="text"
+              name="color"
+              value={carData.color}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
 
           <label>
             Disponibilidade:
-            <select name="status" value={carData.status ? 'true' : 'false'}>
+            <select
+              name="status"
+              value={carData.status ? 'true' : 'false'}
+              onChange={(e) => handleInputChange(e)}
+            >
               <option value="true">Disponível</option>
               <option value="false">Não Disponível</option>
             </select>
@@ -71,22 +92,37 @@ export const EditCarForm = ({
 
           <label>
             Valor de Compra:
-            <input type="number" name="buyValue" value={carData.buyValue} />
+            <input
+              type="number"
+              name="buyValue"
+              value={carData.buyValue}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
 
           <label>
             Quantidade de Portas:
-            <input type="number" name="doorsQty" value={carData.doorsQty} />
+            <input
+              type="number"
+              name="doorsQty"
+              value={carData.doorsQty}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
 
           <label>
             Quantidade de Assentos:
-            <input type="number" name="seatsQty" value={carData.seatsQty} />
+            <input
+              type="number"
+              name="seatsQty"
+              value={carData.seatsQty}
+              onChange={(e) => handleInputChange(e)}
+            />
           </label>
         </form>
 
         <S.ButtonsContainer>
-          <TableButton onClick={() => {}} title="Salvar" color="blue" />
+          <TableButton onClick={onUpdate} title="Salvar" color="blue" />
 
           <TableButton onClick={closeForm} title="Cancelar" color="red" />
         </S.ButtonsContainer>
