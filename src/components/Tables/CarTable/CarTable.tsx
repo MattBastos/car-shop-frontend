@@ -9,7 +9,7 @@ import { TableButton } from '../TableButton';
 import * as S from './styles';
 
 export const CarTable = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [carsData, setCarsData] = useState<Car[]>([]);
   const [selectedCarData, setSelectedCarData] = useState<Car>({
     id: '',
@@ -40,19 +40,18 @@ export const CarTable = () => {
 
   const onDelete = async () => {
     await deleteCar(selectedCarData.id);
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
 
     await fetchData();
   };
 
   const onUpdate = async () => {
     await editCar(selectedCarData);
-    setIsModalOpen(false);
 
     await fetchData();
   };
 
-  const openDeleteConfirmationModal = (
+  const openDeleteModal = (
     carId: string,
     carModel: string,
     carYear: number
@@ -64,10 +63,10 @@ export const CarTable = () => {
       year: carYear
     }));
 
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
   useEffect(() => {
     fetchData();
@@ -77,10 +76,10 @@ export const CarTable = () => {
     <S.Container>
       <DeleteConfirmationModal
         onDelete={onDelete}
-        closeModal={closeModal}
+        closeModal={closeDeleteModal}
         carModel={selectedCarData.model}
         carYear={selectedCarData.year}
-        isModalOpen={isModalOpen}
+        isModalOpen={isDeleteModalOpen}
       />
 
       {carsData.length === 0 ? (
@@ -126,9 +125,7 @@ export const CarTable = () => {
                   />
 
                   <TableButton
-                    onClick={() =>
-                      openDeleteConfirmationModal(car.id, car.model, car.year)
-                    }
+                    onClick={() => openDeleteModal(car.id, car.model, car.year)}
                     title="Deletar"
                     color="red"
                   />
