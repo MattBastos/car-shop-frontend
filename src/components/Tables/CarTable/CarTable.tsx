@@ -5,11 +5,13 @@ import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 import { DeleteConfirmationModal } from '../DeleteConfirmationModal';
+import { EditCarForm } from '../EditCarForm';
 import { TableButton } from '../TableButton';
 import * as S from './styles';
 
 export const CarTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditCarFormOpen, setIsEditCarFormOpen] = useState(false);
   const [carsData, setCarsData] = useState<Car[]>([]);
   const [selectedCarData, setSelectedCarData] = useState<Car>({
     id: '',
@@ -68,6 +70,16 @@ export const CarTable = () => {
 
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
+  const openEditCarForm = (carData: Car) => {
+    setSelectedCarData(() => ({
+      ...carData
+    }));
+
+    setIsEditCarFormOpen(true);
+  };
+
+  const closeEditCarForm = () => setIsEditCarFormOpen(false);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -80,6 +92,13 @@ export const CarTable = () => {
         carModel={selectedCarData.model}
         carYear={selectedCarData.year}
         isModalOpen={isDeleteModalOpen}
+      />
+
+      <EditCarForm
+        onUpdate={onUpdate}
+        closeForm={closeEditCarForm}
+        carData={selectedCarData}
+        isFormOpen={isEditCarFormOpen}
       />
 
       {carsData.length === 0 ? (
@@ -119,7 +138,7 @@ export const CarTable = () => {
 
                 <S.TDActions>
                   <TableButton
-                    onClick={() => onUpdate()}
+                    onClick={() => openEditCarForm(car)}
                     title="Editar"
                     color="blue"
                   />
