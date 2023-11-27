@@ -88,7 +88,10 @@ export const CarTable = () => {
   ) => {
     const { name, value } = e.target;
 
-    setSelectedCarData((prevData) => ({ ...prevData, [name]: value }));
+    setSelectedCarData((prevData) => ({
+      ...prevData,
+      [name]: name === 'status' ? value === 'true' : value
+    }));
   };
 
   useEffect(() => {
