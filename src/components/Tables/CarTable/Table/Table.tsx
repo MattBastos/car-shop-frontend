@@ -103,8 +103,8 @@ export const Table = () => {
       <DeleteConfirmationModal
         onDelete={onDelete}
         closeModal={closeDeleteModal}
-        carModel={selectedCarData.model}
-        carYear={selectedCarData.year}
+        vehicleModel={selectedCarData.model}
+        vehicleYear={selectedCarData.year}
         isModalOpen={isDeleteModalOpen}
       />
 

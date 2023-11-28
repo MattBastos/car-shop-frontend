@@ -5,22 +5,22 @@ import * as S from './styles';
 type DeleteConfirmationModalProps = {
   onDelete: () => void;
   closeModal: () => void;
-  carModel: string;
-  carYear: number;
+  vehicleModel: string;
+  vehicleYear: number;
   isModalOpen: boolean;
 };
 
 export const DeleteConfirmationModal = ({
   onDelete,
   closeModal,
-  carModel,
-  carYear,
+  vehicleModel,
+  vehicleYear,
   isModalOpen
 }: DeleteConfirmationModalProps) => {
   return (
     <Modal
       title="Confirme sua Ação"
-      description={`Tem certeza que deseja deletar o veículo modelo ${carModel} ${carYear}?`}
+      description={`Tem certeza que deseja deletar o veículo modelo ${vehicleModel} ${vehicleYear}?`}
       isModalOpen={isModalOpen}
       closeModal={closeModal}
     >
