@@ -5,8 +5,8 @@ import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 import { DeleteConfirmationModal } from '../../DeleteConfirmationModal';
-import { EditCarForm } from '../../EditCarForm';
 import { TableButton } from '../../TableButton';
+import { EditCarModal } from '../EditCarModal';
 import * as S from './styles';
 
 export const Table = () => {
@@ -108,7 +108,7 @@ export const Table = () => {
         isModalOpen={isDeleteModalOpen}
       />
 
-      <EditCarForm
+      <EditCarModal
         carData={selectedCarData}
         onUpdate={onUpdate}
         handleInputChange={handleInputChange}

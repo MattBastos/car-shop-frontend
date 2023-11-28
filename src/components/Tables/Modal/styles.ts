@@ -15,7 +15,7 @@ export const Container = tw.section`
   fixed
   left-1/2
   top-1/2
-  z-20
+  z-50
   flex
   min-h-min
   min-w-min
