@@ -5,8 +5,8 @@ import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 import { DeleteConfirmationModal } from '../../DeleteConfirmationModal';
-import { EditCarForm } from '../../EditCarForm';
 import { TableButton } from '../../TableButton';
+import { EditCarModal } from '../EditCarModal';
 import * as S from './styles';
 
 export const Table = () => {
@@ -103,12 +103,12 @@ export const Table = () => {
       <DeleteConfirmationModal
         onDelete={onDelete}
         closeModal={closeDeleteModal}
-        carModel={selectedCarData.model}
-        carYear={selectedCarData.year}
+        vehicleModel={selectedCarData.model}
+        vehicleYear={selectedCarData.year}
         isModalOpen={isDeleteModalOpen}
       />
 
-      <EditCarForm
+      <EditCarModal
         carData={selectedCarData}
         onUpdate={onUpdate}
         handleInputChange={handleInputChange}
