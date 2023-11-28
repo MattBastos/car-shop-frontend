@@ -4,12 +4,12 @@ import { getCars, deleteCar, editCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
-import { DeleteConfirmationModal } from '../DeleteConfirmationModal';
-import { EditCarForm } from '../EditCarForm';
-import { TableButton } from '../TableButton';
+import { DeleteConfirmationModal } from '../../DeleteConfirmationModal';
+import { EditCarForm } from '../../EditCarForm';
+import { TableButton } from '../../TableButton';
 import * as S from './styles';
 
-export const CarTable = () => {
+export const Table = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditCarFormOpen, setIsEditCarFormOpen] = useState(false);
 
