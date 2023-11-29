@@ -5,6 +5,12 @@ export const Form = tw.form`
   flex
   flex-col
   gap-2
-  text-lg
+  rounded-lg
+  bg-gray-200
+  px-12
+  py-5
+  text-base
   text-gray-800
+  md:px-16
+  md:text-xl
 `;
