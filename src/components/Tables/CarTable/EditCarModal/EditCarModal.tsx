@@ -1,8 +1,8 @@
 import { Car } from '@/types';
 
 import { Modal } from '../../Modal';
+import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
-import * as S from './styles';
 
 type EditCarModalProps = {
   carData: Car;
@@ -110,11 +110,11 @@ export const EditCarModal = ({
         </label>
       </form>
 
-      <S.ButtonsContainer>
+      <ModalButtonsContainer>
         <TableButton onClick={onUpdate} title="Salvar" color="blue" />
 
         <TableButton onClick={closeForm} title="Cancelar" color="red" />
-      </S.ButtonsContainer>
+      </ModalButtonsContainer>
     </Modal>
   );
 };
