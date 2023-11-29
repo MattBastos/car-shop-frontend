@@ -1,6 +1,7 @@
 import { Car } from '@/types';
 
 import { FormInput } from '../../FormInput';
+import { FormSelect } from '../../FormSelect';
 import * as S from './styles';
 
 type FormProps = {
@@ -13,18 +14,12 @@ type FormProps = {
 export const Form = ({ carData, handleInputChange }: FormProps) => {
   return (
     <S.Form>
-      <label className="flex flex-col">
-        <span className="mb-1">Disponibilidade:</span>
-        <select
-          name="status"
-          value={carData.status ? 'true' : 'false'}
-          onChange={(e) => handleInputChange(e)}
-          className="rounded border px-2 py-1"
-        >
-          <option value="true">Disponível</option>
-          <option value="false">Não Disponível</option>
-        </select>
-      </label>
+      <FormSelect
+        title="Disponibilidade:"
+        name="status"
+        value={carData.status}
+        handleInputChange={(e) => handleInputChange(e)}
+      />
 
       <FormInput
         title="Modelo:"
