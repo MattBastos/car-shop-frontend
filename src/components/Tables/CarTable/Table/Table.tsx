@@ -42,11 +42,23 @@ export const Table = () => {
     if (data) setCarsData(data);
   };
 
-  const onDelete = async () => {
-    await deleteCar(selectedCarData.id);
-    setIsDeleteModalOpen(false);
+  const openEditCarForm = (carData: Car) => {
+    setSelectedCarData(() => ({
+      ...carData
+    }));
 
-    await fetchData();
+    setIsEditCarFormOpen(true);
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setSelectedCarData((prevData) => ({
+      ...prevData,
+      [name]: name === 'status' ? value === 'true' : value
+    }));
   };
 
   const onUpdate = async () => {
@@ -55,6 +67,8 @@ export const Table = () => {
 
     await fetchData();
   };
+
+  const closeEditCarForm = () => setIsEditCarFormOpen(false);
 
   const openDeleteModal = (
     carId: string,
@@ -71,28 +85,14 @@ export const Table = () => {
     setIsDeleteModalOpen(true);
   };
 
+  const onDelete = async () => {
+    await deleteCar(selectedCarData.id);
+    setIsDeleteModalOpen(false);
+
+    await fetchData();
+  };
+
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
-
-  const openEditCarForm = (carData: Car) => {
-    setSelectedCarData(() => ({
-      ...carData
-    }));
-
-    setIsEditCarFormOpen(true);
-  };
-
-  const closeEditCarForm = () => setIsEditCarFormOpen(false);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-
-    setSelectedCarData((prevData) => ({
-      ...prevData,
-      [name]: name === 'status' ? value === 'true' : value
-    }));
-  };
 
   useEffect(() => {
     fetchData();
