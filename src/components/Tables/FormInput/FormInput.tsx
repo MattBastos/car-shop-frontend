@@ -1,17 +1,17 @@
 import * as S from './styles';
 
 type FormInputProps = {
-  spanTitle: string;
+  title: string;
   type: string;
   name: string;
-  value: string;
+  value: string | number;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 };
 
 export const FormInput = ({
-  spanTitle,
+  title,
   type,
   name,
   value,
@@ -19,7 +19,7 @@ export const FormInput = ({
 }: FormInputProps) => {
   return (
     <S.Label>
-      <S.Span>{spanTitle}</S.Span>
+      <S.Span>{title}</S.Span>
 
       <S.Input
         type={type}
