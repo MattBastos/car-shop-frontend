@@ -1,6 +1,6 @@
 import { Modal } from '../Modal';
+import { ModalButtonsContainer } from '../ModalButtonsContainer';
 import { TableButton } from '../TableButton';
-import * as S from './styles';
 
 type DeleteConfirmationModalProps = {
   onDelete: () => void;
@@ -24,11 +24,11 @@ export const DeleteConfirmationModal = ({
       isModalOpen={isModalOpen}
       closeModal={closeModal}
     >
-      <S.ButtonsContainer>
+      <ModalButtonsContainer>
         <TableButton onClick={() => onDelete()} title="Deletar" color="red" />
 
         <TableButton onClick={closeModal} title="Cancelar" color="gray" />
-      </S.ButtonsContainer>
+      </ModalButtonsContainer>
     </Modal>
   );
 };
