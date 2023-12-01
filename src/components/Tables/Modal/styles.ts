@@ -71,10 +71,3 @@ export const Text = tw.p`
   text-lg
   md:text-xl
 `;
-
-export const ButtonsContainer = tw.section`
-  flex
-  items-center
-  justify-center
-  gap-5
-`;

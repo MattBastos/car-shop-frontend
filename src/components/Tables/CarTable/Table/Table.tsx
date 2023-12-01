@@ -4,9 +4,10 @@ import { getCars, deleteCar, editCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
-import { DeleteConfirmationModal } from '../../DeleteConfirmationModal';
+import { Modal } from '../../Modal';
+import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
-import { EditCarModal } from '../EditCarModal';
+import { Form } from '../Form';
 import * as S from './styles';
 
 export const Table = () => {
@@ -100,21 +101,41 @@ export const Table = () => {
 
   return (
     <S.Container>
-      <DeleteConfirmationModal
-        onDelete={onDelete}
-        closeModal={closeDeleteModal}
-        vehicleModel={selectedCarData.model}
-        vehicleYear={selectedCarData.year}
-        isModalOpen={isDeleteModalOpen}
-      />
+      <Modal
+        title="Editar Carro"
+        description={`Preencha os dados abaixo para editar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}:`}
+        isModalOpen={isEditCarFormOpen}
+        closeModal={closeEditCarForm}
+      >
+        <Form carData={selectedCarData} handleInputChange={handleInputChange} />
 
-      <EditCarModal
-        carData={selectedCarData}
-        onUpdate={onUpdate}
-        handleInputChange={handleInputChange}
-        closeForm={closeEditCarForm}
-        isFormOpen={isEditCarFormOpen}
-      />
+        <ModalButtonsContainer>
+          <TableButton onClick={onUpdate} title="Salvar" color="blue" />
+
+          <TableButton
+            onClick={closeEditCarForm}
+            title="Cancelar"
+            color="red"
+          />
+        </ModalButtonsContainer>
+      </Modal>
+
+      <Modal
+        title="Confirme sua Ação"
+        description={`Tem certeza que deseja deletar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}?`}
+        isModalOpen={isDeleteModalOpen}
+        closeModal={closeDeleteModal}
+      >
+        <ModalButtonsContainer>
+          <TableButton onClick={() => onDelete()} title="Deletar" color="red" />
+
+          <TableButton
+            onClick={closeDeleteModal}
+            title="Cancelar"
+            color="gray"
+          />
+        </ModalButtonsContainer>
+      </Modal>
 
       {carsData.length === 0 ? (
         <S.NoCarMessage>Nenhum carro encontrado!</S.NoCarMessage>
