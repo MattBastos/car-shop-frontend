@@ -1,6 +1,9 @@
 import tw from 'tailwind-styled-components';
 
 export const Container = tw.section`
+  flex
+  flex-col
+  gap-5
   relative
   w-full
   overflow-x-auto

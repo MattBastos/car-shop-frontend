@@ -1,6 +1,6 @@
 'use client';
 
-import { getCars, deleteCar, updateCar } from '@/api/cars';
+import { getCars, deleteCar, updateCar, createCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
@@ -11,6 +11,7 @@ import { Form } from '../Form';
 import * as S from './styles';
 
 export const Table = () => {
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -54,6 +55,17 @@ export const Table = () => {
     if (data) setCarsData(data);
   };
 
+  const openCreateModal = () => setIsCreateModalOpen(true);
+
+  const onCreate = async () => {
+    await createCar(carFormData);
+    setIsCreateModalOpen(false);
+
+    await fetchData();
+  };
+
+  const closeCreateModal = () => setIsCreateModalOpen(false);
+
   const openEditModal = (carData: Car) => {
     setSelectedCarData(() => ({ ...carData }));
     setCarFormData(() => ({ ...carData }));
@@ -79,7 +91,7 @@ export const Table = () => {
     await fetchData();
   };
 
-  const closeEditCarForm = () => setIsEditModalOpen(false);
+  const closeEditModal = () => setIsEditModalOpen(false);
 
   const openDeleteModal = (carData: Car) => {
     setSelectedCarData(() => ({ ...carData }));
@@ -102,22 +114,39 @@ export const Table = () => {
 
   return (
     <S.Container>
+      <TableButton onClick={openCreateModal} title="Criar" color="green" />
+
+      <Modal
+        title="Criar Carro"
+        description="Preencha os dados abaixo para criar um novo carro:"
+        isModalOpen={isCreateModalOpen}
+        closeModal={closeCreateModal}
+      >
+        <Form carData={carFormData} handleInputChange={handleInputChange} />
+
+        <ModalButtonsContainer>
+          <TableButton onClick={onCreate} title="Criar" color="green" />
+
+          <TableButton
+            onClick={closeCreateModal}
+            title="Cancelar"
+            color="gray"
+          />
+        </ModalButtonsContainer>
+      </Modal>
+
       <Modal
         title="Editar Carro"
         description={`Preencha os dados abaixo para editar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}:`}
         isModalOpen={isEditModalOpen}
-        closeModal={closeEditCarForm}
+        closeModal={closeEditModal}
       >
         <Form carData={carFormData} handleInputChange={handleInputChange} />
 
         <ModalButtonsContainer>
           <TableButton onClick={onUpdate} title="Salvar" color="blue" />
 
-          <TableButton
-            onClick={closeEditCarForm}
-            title="Cancelar"
-            color="red"
-          />
+          <TableButton onClick={closeEditModal} title="Cancelar" color="gray" />
         </ModalButtonsContainer>
       </Modal>
 
