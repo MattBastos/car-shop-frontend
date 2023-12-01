@@ -32,3 +32,14 @@ export const updateCar = async ({ id, ...carData }: Car) => {
     `Erro ao editar carro: ${error}`;
   }
 };
+
+export const createCar = async (carData: Omit<Car, 'id'>) => {
+  try {
+    const { status } = await axiosInstance.post('cars', carData);
+    if (status === 200) {
+      return 'Carro criado com sucesso!';
+    }
+  } catch (error) {
+    `Erro ao criar carro: ${error}`;
+  }
+};
