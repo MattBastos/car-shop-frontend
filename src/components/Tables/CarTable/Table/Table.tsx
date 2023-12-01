@@ -1,21 +1,33 @@
 'use client';
 
-import { getCars, deleteCar, editCar } from '@/api/cars';
+import { getCars, deleteCar, updateCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
-import { DeleteConfirmationModal } from '../../DeleteConfirmationModal';
+import { Modal } from '../../Modal';
+import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
-import { EditCarModal } from '../EditCarModal';
+import { Form } from '../Form';
 import * as S from './styles';
 
 export const Table = () => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditCarFormOpen, setIsEditCarFormOpen] = useState(false);
 
   const [carsData, setCarsData] = useState<Car[]>([]);
 
   const [selectedCarData, setSelectedCarData] = useState<Car>({
+    id: '',
+    model: '',
+    year: 0,
+    color: '',
+    status: false,
+    buyValue: 0,
+    doorsQty: 0,
+    seatsQty: 0
+  });
+
+  const [carFormData, setCarFormData] = useState<Car>({
     id: '',
     model: '',
     year: 0,
@@ -42,12 +54,11 @@ export const Table = () => {
     if (data) setCarsData(data);
   };
 
-  const openEditCarForm = (carData: Car) => {
-    setSelectedCarData(() => ({
-      ...carData
-    }));
+  const openEditModal = (carData: Car) => {
+    setSelectedCarData(() => ({ ...carData }));
+    setCarFormData(() => ({ ...carData }));
 
-    setIsEditCarFormOpen(true);
+    setIsEditModalOpen(true);
   };
 
   const handleInputChange = (
@@ -55,32 +66,23 @@ export const Table = () => {
   ) => {
     const { name, value } = e.target;
 
-    setSelectedCarData((prevData) => ({
+    setCarFormData((prevData) => ({
       ...prevData,
       [name]: name === 'status' ? value === 'true' : value
     }));
   };
 
   const onUpdate = async () => {
-    await editCar(selectedCarData);
-    setIsEditCarFormOpen(false);
+    await updateCar(carFormData);
+    setIsEditModalOpen(false);
 
     await fetchData();
   };
 
-  const closeEditCarForm = () => setIsEditCarFormOpen(false);
+  const closeEditCarForm = () => setIsEditModalOpen(false);
 
-  const openDeleteModal = (
-    carId: string,
-    carModel: string,
-    carYear: number
-  ) => {
-    setSelectedCarData((prevState) => ({
-      ...prevState,
-      id: carId,
-      model: carModel,
-      year: carYear
-    }));
+  const openDeleteModal = (carData: Car) => {
+    setSelectedCarData(() => ({ ...carData }));
 
     setIsDeleteModalOpen(true);
   };
@@ -100,21 +102,41 @@ export const Table = () => {
 
   return (
     <S.Container>
-      <DeleteConfirmationModal
-        onDelete={onDelete}
-        closeModal={closeDeleteModal}
-        vehicleModel={selectedCarData.model}
-        vehicleYear={selectedCarData.year}
-        isModalOpen={isDeleteModalOpen}
-      />
+      <Modal
+        title="Editar Carro"
+        description={`Preencha os dados abaixo para editar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}:`}
+        isModalOpen={isEditModalOpen}
+        closeModal={closeEditCarForm}
+      >
+        <Form carData={carFormData} handleInputChange={handleInputChange} />
 
-      <EditCarModal
-        carData={selectedCarData}
-        onUpdate={onUpdate}
-        handleInputChange={handleInputChange}
-        closeForm={closeEditCarForm}
-        isFormOpen={isEditCarFormOpen}
-      />
+        <ModalButtonsContainer>
+          <TableButton onClick={onUpdate} title="Salvar" color="blue" />
+
+          <TableButton
+            onClick={closeEditCarForm}
+            title="Cancelar"
+            color="red"
+          />
+        </ModalButtonsContainer>
+      </Modal>
+
+      <Modal
+        title="Confirme sua Ação"
+        description={`Tem certeza que deseja deletar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}?`}
+        isModalOpen={isDeleteModalOpen}
+        closeModal={closeDeleteModal}
+      >
+        <ModalButtonsContainer>
+          <TableButton onClick={() => onDelete()} title="Deletar" color="red" />
+
+          <TableButton
+            onClick={closeDeleteModal}
+            title="Cancelar"
+            color="gray"
+          />
+        </ModalButtonsContainer>
+      </Modal>
 
       {carsData.length === 0 ? (
         <S.NoCarMessage>Nenhum carro encontrado!</S.NoCarMessage>
@@ -153,13 +175,13 @@ export const Table = () => {
 
                 <S.TDActions>
                   <TableButton
-                    onClick={() => openEditCarForm(car)}
+                    onClick={() => openEditModal(car)}
                     title="Editar"
                     color="blue"
                   />
 
                   <TableButton
-                    onClick={() => openDeleteModal(car.id, car.model, car.year)}
+                    onClick={() => openDeleteModal(car)}
                     title="Deletar"
                     color="red"
                   />

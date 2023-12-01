@@ -22,7 +22,7 @@ export const deleteCar = async (carId: string) => {
   }
 };
 
-export const editCar = async ({ id, ...carData }: Car) => {
+export const updateCar = async ({ id, ...carData }: Car) => {
   try {
     const { status } = await axiosInstance.put(`cars/${id}`, carData);
     if (status === 200) {
