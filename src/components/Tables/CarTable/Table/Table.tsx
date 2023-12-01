@@ -27,6 +27,17 @@ export const Table = () => {
     seatsQty: 0
   });
 
+  const [carFormData, setCarFormData] = useState<Car>({
+    id: '',
+    model: '',
+    year: 0,
+    color: '',
+    status: false,
+    buyValue: 0,
+    doorsQty: 0,
+    seatsQty: 0
+  });
+
   const tableHeaders = [
     'Modelo',
     'Ano',
@@ -44,9 +55,8 @@ export const Table = () => {
   };
 
   const openEditCarForm = (carData: Car) => {
-    setSelectedCarData(() => ({
-      ...carData
-    }));
+    setSelectedCarData(() => ({ ...carData }));
+    setCarFormData(() => ({ ...carData }));
 
     setIsEditCarFormOpen(true);
   };
@@ -56,14 +66,14 @@ export const Table = () => {
   ) => {
     const { name, value } = e.target;
 
-    setSelectedCarData((prevData) => ({
+    setCarFormData((prevData) => ({
       ...prevData,
       [name]: name === 'status' ? value === 'true' : value
     }));
   };
 
   const onUpdate = async () => {
-    await editCar(selectedCarData);
+    await editCar(carFormData);
     setIsEditCarFormOpen(false);
 
     await fetchData();
@@ -107,7 +117,7 @@ export const Table = () => {
         isModalOpen={isEditCarFormOpen}
         closeModal={closeEditCarForm}
       >
-        <Form carData={selectedCarData} handleInputChange={handleInputChange} />
+        <Form carData={carFormData} handleInputChange={handleInputChange} />
 
         <ModalButtonsContainer>
           <TableButton onClick={onUpdate} title="Salvar" color="blue" />
