@@ -17,8 +17,9 @@ export const Container = tw.section`
   top-1/2
   z-50
   flex
-  min-h-min
-  min-w-min
+  h-11/12
+  w-4/5
+  md:w-1/2
   -translate-x-1/2
   -translate-y-1/2
   transform
@@ -68,6 +69,6 @@ export const SeparatorLine = tw.hr`
 export const Text = tw.p`
   mb-6
   text-center
-  text-lg
+  text-base
   md:text-xl
 `;
