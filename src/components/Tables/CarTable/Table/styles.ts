@@ -2,8 +2,17 @@ import tw from 'tailwind-styled-components';
 
 export const Container = tw.section`
   flex
+  w-full
   flex-col
   gap-5
+`;
+
+export const CreateVehicleButtonContainer = tw.section`
+  flex
+  justify-end
+`;
+
+export const TableContainer = tw.section`
   relative
   w-full
   overflow-x-auto
