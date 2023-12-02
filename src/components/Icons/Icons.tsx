@@ -5,5 +5,6 @@ export {
   Motorcycle,
   GithubLogo,
   LinkedinLogo,
-  X
+  X,
+  Plus
 } from '@phosphor-icons/react';
