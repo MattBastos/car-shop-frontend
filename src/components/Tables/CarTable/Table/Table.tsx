@@ -75,7 +75,12 @@ export const Table = () => {
           />
 
           <ModalButtonsContainer>
-            <ModalButton onClick={onCreate} title="Criar" color="green" />
+            <ModalButton
+              onClick={onCreate}
+              title="Criar"
+              color="green"
+              isDisabled
+            />
 
             <ModalButton
               onClick={closeCreateModal}
