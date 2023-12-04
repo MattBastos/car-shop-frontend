@@ -4,3 +4,4 @@ export * from './Modal';
 export * from './ModalButtonsContainer';
 export * from './FormSelect';
 export * from './FormTextInput';
+export * from './FormNumberInput';
