@@ -1,7 +1,8 @@
 import { Car } from '@/types';
 
-import { FormInput } from '../../FormInput';
+import { FormNumberInput } from '../../FormNumberInput';
 import { FormSelect } from '../../FormSelect';
+import { FormTextInput } from '../../FormTextInput';
 import * as S from './styles';
 
 type FormProps = {
@@ -21,49 +22,43 @@ export const Form = ({ carData, handleInputChange }: FormProps) => {
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormTextInput
         title="Modelo:"
-        type="text"
         name="model"
         value={carData.model}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormNumberInput
         title="Ano:"
-        type="number"
         name="year"
         value={carData.year}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormTextInput
         title="Cor:"
-        type="text"
         name="color"
         value={carData.color}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormNumberInput
         title="Valor de Compra:"
-        type="number"
         name="buyValue"
         value={carData.buyValue}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormNumberInput
         title="Quantidade de Portas:"
-        type="number"
         name="doorsQty"
         value={carData.doorsQty}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
-      <FormInput
+      <FormNumberInput
         title="Quantidade de Assentos:"
-        type="number"
         name="seatsQty"
         value={carData.seatsQty}
         handleInputChange={(e) => handleInputChange(e)}

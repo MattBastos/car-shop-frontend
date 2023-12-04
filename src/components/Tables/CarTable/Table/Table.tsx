@@ -20,7 +20,8 @@ export const Table = () => {
     isCreateModalOpen,
     createCarFormData,
     handleChangeCreateInput,
-    onCreate
+    onCreate,
+    isFormDataValid
   } = useCreateCar();
 
   const {
@@ -75,7 +76,12 @@ export const Table = () => {
           />
 
           <ModalButtonsContainer>
-            <ModalButton onClick={onCreate} title="Criar" color="green" />
+            <ModalButton
+              onClick={onCreate}
+              title="Criar"
+              color="green"
+              isDisabled={isFormDataValid()}
+            />
 
             <ModalButton
               onClick={closeCreateModal}
