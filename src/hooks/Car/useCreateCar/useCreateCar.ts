@@ -2,8 +2,9 @@ import { createCar } from '@/api/cars';
 import { Car } from '@/types';
 import { useState } from 'react';
 
-export const useCreateCarModal = () => {
+export const useCreateCar = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
   const [carFormData, setCarFormData] = useState<Car>({
     id: '',
     model: '',
