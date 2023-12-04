@@ -1,12 +1,12 @@
 import * as S from './styles';
 
-type TableButtonProps = {
+type ModalButtonProps = {
   onClick: () => void;
   title: string;
   color: string;
 };
 
-export const TableButton = ({ onClick, title, color }: TableButtonProps) => {
+export const ModalButton = ({ onClick, title, color }: ModalButtonProps) => {
   return (
     <S.Button
       onClick={() => onClick()}

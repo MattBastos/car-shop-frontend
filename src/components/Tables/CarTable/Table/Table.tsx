@@ -1,44 +1,45 @@
 'use client';
 
-import { getCars, deleteCar, updateCar, createCar } from '@/api/cars';
-import { Car } from '@/types';
-import { useState, useEffect } from 'react';
+import { useCarData, useCreateCar, useDeleteCar, useEditCar } from '@/hooks';
+import { useEffect } from 'react';
 
 import { CreateVehicleButton } from '../../CreateVehicleButton';
 import { Modal } from '../../Modal';
+import { ModalButton } from '../../ModalButton';
 import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
 import { Form } from '../Form';
 import * as S from './styles';
 
 export const Table = () => {
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { carData, fetchData } = useCarData();
 
-  const [carsData, setCarsData] = useState<Car[]>([]);
+  const {
+    openCreateModal,
+    closeCreateModal,
+    isCreateModalOpen,
+    createCarFormData,
+    handleChangeCreateInput,
+    onCreate
+  } = useCreateCar();
 
-  const [selectedCarData, setSelectedCarData] = useState<Car>({
-    id: '',
-    model: '',
-    year: 0,
-    color: '',
-    status: false,
-    buyValue: 0,
-    doorsQty: 0,
-    seatsQty: 0
-  });
+  const {
+    isEditModalOpen,
+    openEditModal,
+    closeEditModal,
+    selectedEditCarData,
+    carFormData,
+    handleChangeEditCar,
+    onUpdate
+  } = useEditCar();
 
-  const [carFormData, setCarFormData] = useState<Car>({
-    id: '',
-    model: '',
-    year: 0,
-    color: '',
-    status: false,
-    buyValue: 0,
-    doorsQty: 0,
-    seatsQty: 0
-  });
+  const {
+    isDeleteModalOpen,
+    selectedDeleteCarData,
+    openDeleteModal,
+    closeDeleteModal,
+    onDelete
+  } = useDeleteCar();
 
   const tableHeaders = [
     'Modelo',
@@ -51,67 +52,9 @@ export const Table = () => {
     'Ações'
   ];
 
-  const fetchData = async () => {
-    const data = await getCars();
-    if (data) setCarsData(data);
-  };
-
-  const openCreateModal = () => setIsCreateModalOpen(true);
-
-  const onCreate = async () => {
-    await createCar(carFormData);
-    setIsCreateModalOpen(false);
-
-    await fetchData();
-  };
-
-  const closeCreateModal = () => setIsCreateModalOpen(false);
-
-  const openEditModal = (carData: Car) => {
-    setSelectedCarData(() => ({ ...carData }));
-    setCarFormData(() => ({ ...carData }));
-
-    setIsEditModalOpen(true);
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-
-    setCarFormData((prevData) => ({
-      ...prevData,
-      [name]: name === 'status' ? value === 'true' : value
-    }));
-  };
-
-  const onUpdate = async () => {
-    await updateCar(carFormData);
-    setIsEditModalOpen(false);
-
-    await fetchData();
-  };
-
-  const closeEditModal = () => setIsEditModalOpen(false);
-
-  const openDeleteModal = (carData: Car) => {
-    setSelectedCarData(() => ({ ...carData }));
-
-    setIsDeleteModalOpen(true);
-  };
-
-  const onDelete = async () => {
-    await deleteCar(selectedCarData.id);
-    setIsDeleteModalOpen(false);
-
-    await fetchData();
-  };
-
-  const closeDeleteModal = () => setIsDeleteModalOpen(false);
-
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <S.Container>
@@ -126,12 +69,15 @@ export const Table = () => {
           isModalOpen={isCreateModalOpen}
           closeModal={closeCreateModal}
         >
-          <Form carData={carFormData} handleInputChange={handleInputChange} />
+          <Form
+            carData={createCarFormData}
+            handleInputChange={handleChangeCreateInput}
+          />
 
           <ModalButtonsContainer>
-            <TableButton onClick={onCreate} title="Criar" color="green" />
+            <ModalButton onClick={onCreate} title="Criar" color="green" />
 
-            <TableButton
+            <ModalButton
               onClick={closeCreateModal}
               title="Cancelar"
               color="gray"
@@ -141,16 +87,16 @@ export const Table = () => {
 
         <Modal
           title="Editar Carro"
-          description={`Preencha os dados abaixo para editar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}:`}
+          description={`Preencha os dados abaixo para editar o veículo modelo ${selectedEditCarData.model} ${selectedEditCarData.year}:`}
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
         >
-          <Form carData={carFormData} handleInputChange={handleInputChange} />
+          <Form carData={carFormData} handleInputChange={handleChangeEditCar} />
 
           <ModalButtonsContainer>
-            <TableButton onClick={onUpdate} title="Salvar" color="blue" />
+            <ModalButton onClick={onUpdate} title="Salvar" color="blue" />
 
-            <TableButton
+            <ModalButton
               onClick={closeEditModal}
               title="Cancelar"
               color="gray"
@@ -160,18 +106,18 @@ export const Table = () => {
 
         <Modal
           title="Confirme sua Ação"
-          description={`Tem certeza que deseja deletar o veículo modelo ${selectedCarData.model} ${selectedCarData.year}?`}
+          description={`Tem certeza que deseja deletar o veículo modelo ${selectedDeleteCarData.model} ${selectedDeleteCarData.year}?`}
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
         >
           <ModalButtonsContainer>
-            <TableButton
+            <ModalButton
               onClick={() => onDelete()}
               title="Deletar"
               color="red"
             />
 
-            <TableButton
+            <ModalButton
               onClick={closeDeleteModal}
               title="Cancelar"
               color="gray"
@@ -179,7 +125,7 @@ export const Table = () => {
           </ModalButtonsContainer>
         </Modal>
 
-        {carsData.length === 0 ? (
+        {carData.length === 0 ? (
           <S.NoCarMessage>Nenhum carro encontrado!</S.NoCarMessage>
         ) : (
           <S.Table>
@@ -194,7 +140,7 @@ export const Table = () => {
             </S.THead>
 
             <S.TBody>
-              {carsData.map((car) => (
+              {carData.map((car) => (
                 <S.TBodyRow key={car.id}>
                   <S.TD>{car.model}</S.TD>
 
