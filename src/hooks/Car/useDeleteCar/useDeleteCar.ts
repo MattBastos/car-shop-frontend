@@ -1,4 +1,4 @@
-import { deleteCar } from '@/api/cars';
+import { deleteCar } from '@/api';
 import { Car } from '@/types';
 import { useState } from 'react';
 

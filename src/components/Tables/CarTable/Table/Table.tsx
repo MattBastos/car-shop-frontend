@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { CreateVehicleButton } from '../../CreateVehicleButton';
 import { Modal } from '../../Modal';
+import { ModalButton } from '../../ModalButton';
 import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
 import { Form } from '../Form';
@@ -74,9 +75,9 @@ export const Table = () => {
           />
 
           <ModalButtonsContainer>
-            <TableButton onClick={onCreate} title="Criar" color="green" />
+            <ModalButton onClick={onCreate} title="Criar" color="green" />
 
-            <TableButton
+            <ModalButton
               onClick={closeCreateModal}
               title="Cancelar"
               color="gray"
@@ -93,9 +94,9 @@ export const Table = () => {
           <Form carData={carFormData} handleInputChange={handleChangeEditCar} />
 
           <ModalButtonsContainer>
-            <TableButton onClick={onUpdate} title="Salvar" color="blue" />
+            <ModalButton onClick={onUpdate} title="Salvar" color="blue" />
 
-            <TableButton
+            <ModalButton
               onClick={closeEditModal}
               title="Cancelar"
               color="gray"
@@ -110,13 +111,13 @@ export const Table = () => {
           closeModal={closeDeleteModal}
         >
           <ModalButtonsContainer>
-            <TableButton
+            <ModalButton
               onClick={() => onDelete()}
               title="Deletar"
               color="red"
             />
 
-            <TableButton
+            <ModalButton
               onClick={closeDeleteModal}
               title="Cancelar"
               color="gray"
