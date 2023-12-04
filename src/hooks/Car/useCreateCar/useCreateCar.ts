@@ -16,7 +16,21 @@ export const useCreateCar = () => {
     seatsQty: 0
   });
 
-  const openCreateModal = () => setIsCreateModalOpen(true);
+  const openCreateModal = () => {
+    setCreateCarFormData({
+      id: '',
+      model: '',
+      year: 0,
+      color: '',
+      status: false,
+      buyValue: 0,
+      doorsQty: 0,
+      seatsQty: 0
+    });
+
+    setIsCreateModalOpen(true);
+  };
+
   const closeCreateModal = () => setIsCreateModalOpen(false);
 
   const handleChangeCreateInput = (
@@ -35,12 +49,27 @@ export const useCreateCar = () => {
     setIsCreateModalOpen(false);
   };
 
+  const isFormDataValid = (): boolean => {
+    const isTextDataValid =
+      createCarFormData.model.trim().length >= 3 &&
+      createCarFormData.color.trim().length >= 3;
+
+    const isNumberDataValid =
+      createCarFormData.year.toString().length === 4 &&
+      createCarFormData.buyValue >= 5000 &&
+      createCarFormData.doorsQty >= 2 &&
+      createCarFormData.seatsQty >= 2;
+
+    return !(isTextDataValid && isNumberDataValid);
+  };
+
   return {
     openCreateModal,
     closeCreateModal,
     isCreateModalOpen,
     createCarFormData,
     handleChangeCreateInput,
-    onCreate
+    onCreate,
+    isFormDataValid
   };
 };
