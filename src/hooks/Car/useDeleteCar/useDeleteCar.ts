@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const useDeleteCar = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const [selectedCarData, setSelectedCarData] = useState<Car>({
+  const [selectedDeleteCarData, setSelectedDeleteCarData] = useState<Car>({
     id: '',
     model: '',
     year: 0,
@@ -17,7 +17,7 @@ export const useDeleteCar = () => {
   });
 
   const openDeleteModal = (carData: Car) => {
-    setSelectedCarData(() => ({ ...carData }));
+    setSelectedDeleteCarData(() => ({ ...carData }));
 
     setIsDeleteModalOpen(true);
   };
@@ -25,13 +25,13 @@ export const useDeleteCar = () => {
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
   const onDelete = async () => {
-    await deleteCar(selectedCarData.id);
+    await deleteCar(selectedDeleteCarData.id);
     setIsDeleteModalOpen(false);
   };
 
   return {
     isDeleteModalOpen,
-    selectedCarData,
+    selectedDeleteCarData,
     openDeleteModal,
     closeDeleteModal,
     onDelete

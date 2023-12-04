@@ -1,1 +1,0 @@
-export { useCarTable } from './useCarTable';

@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const useEditCar = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const [selectedCarData, setSelectedCarData] = useState<Car>({
+  const [selectedEditCarData, setSelectedEditCarData] = useState<Car>({
     id: '',
     model: '',
     year: 0,
@@ -28,7 +28,7 @@ export const useEditCar = () => {
   });
 
   const openEditModal = (carData: Car) => {
-    setSelectedCarData(() => ({ ...carData }));
+    setSelectedEditCarData(() => ({ ...carData }));
     setCarFormData(() => ({ ...carData }));
 
     setIsEditModalOpen(true);
@@ -36,7 +36,7 @@ export const useEditCar = () => {
 
   const closeEditModal = () => setIsEditModalOpen(false);
 
-  const handleInputChange = (
+  const handleChangeEditCar = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
@@ -55,9 +55,9 @@ export const useEditCar = () => {
     isEditModalOpen,
     openEditModal,
     closeEditModal,
-    selectedCarData,
+    selectedEditCarData,
     carFormData,
-    handleInputChange,
+    handleChangeEditCar,
     onUpdate
   };
 };

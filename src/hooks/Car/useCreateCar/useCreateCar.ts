@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const useCreateCar = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  const [carFormData, setCarFormData] = useState<Car>({
+  const [createCarFormData, setCreateCarFormData] = useState<Car>({
     id: '',
     model: '',
     year: 0,
@@ -19,19 +19,19 @@ export const useCreateCar = () => {
   const openCreateModal = () => setIsCreateModalOpen(true);
   const closeCreateModal = () => setIsCreateModalOpen(false);
 
-  const handleInputChange = (
+  const handleChangeCreateInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
 
-    setCarFormData((prevData) => ({
+    setCreateCarFormData((prevData) => ({
       ...prevData,
       [name]: name === 'status' ? value === 'true' : value
     }));
   };
 
   const onCreate = async () => {
-    await createCar(carFormData);
+    await createCar(createCarFormData);
     setIsCreateModalOpen(false);
   };
 
@@ -39,8 +39,8 @@ export const useCreateCar = () => {
     openCreateModal,
     closeCreateModal,
     isCreateModalOpen,
-    carFormData,
-    handleInputChange,
+    createCarFormData,
+    handleChangeCreateInput,
     onCreate
   };
 };

@@ -3,16 +3,16 @@ import { Car } from '@/types';
 import { useState, useEffect } from 'react';
 
 export const useCarData = () => {
-  const [carsData, setCarsData] = useState<Car[]>([]);
+  const [carData, setCarData] = useState<Car[]>([]);
 
   const fetchData = async () => {
     const data = await getCars();
-    if (data) setCarsData(data);
+    if (data) setCarData(data);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  return { carsData, fetchData };
+  return { carData, fetchData };
 };
