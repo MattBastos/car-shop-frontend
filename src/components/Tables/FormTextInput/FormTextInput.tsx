@@ -1,28 +1,26 @@
 import * as S from './styles';
 
-type FormInputProps = {
+type FormTextInputProps = {
   title: string;
-  type: string;
   name: string;
-  value: string | number;
+  value: string;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 };
 
-export const FormInput = ({
+export const FormTextInput = ({
   title,
-  type,
   name,
   value,
   handleInputChange
-}: FormInputProps) => {
+}: FormTextInputProps) => {
   return (
     <S.Label>
       <S.Span>{title}</S.Span>
 
       <S.Input
-        type={type}
+        type="text"
         name={name}
         value={value}
         onChange={(e) => handleInputChange(e)}
