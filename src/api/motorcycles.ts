@@ -42,3 +42,17 @@ export const updateMotorcycle = async ({
     `Erro ao editar motocicleta: ${error}`;
   }
 };
+
+export const createMotorcycle = async (
+  motorcycleData: Omit<Motorcycle, 'id'>
+) => {
+  try {
+    const { status } = await axiosInstance.post('motorcycles', motorcycleData);
+
+    if (status === 200) {
+      return 'Motocicleta criada com sucesso!';
+    }
+  } catch (error) {
+    `Erro ao criar motocicleta: ${error}`;
+  }
+};
