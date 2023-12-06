@@ -24,3 +24,21 @@ export const deleteMotorcycle = async (motorcycleId: string) => {
     `Erro ao deletar motocicleta: ${error}`;
   }
 };
+
+export const updateMotorcycle = async ({
+  id,
+  ...motorcycleData
+}: Motorcycle) => {
+  try {
+    const { status } = await axiosInstance.put(
+      `motorcycles/${id}`,
+      motorcycleData
+    );
+
+    if (status === 200) {
+      return 'Motocicleta editada com sucesso!';
+    }
+  } catch (error) {
+    `Erro ao editar motocicleta: ${error}`;
+  }
+};
