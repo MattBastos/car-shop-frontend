@@ -1,10 +1,6 @@
-export type Motorcycle = {
-  id: string;
-  model: string;
-  year: number;
-  color: string;
-  status: boolean;
-  buyValue: number;
+import { Vehicle } from './Vehicle';
+
+export type Motorcycle = Vehicle & {
   category: string;
   engineCapacity: number;
 };
