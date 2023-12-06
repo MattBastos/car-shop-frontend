@@ -1,10 +1,6 @@
-export type Car = {
-  id: string;
-  model: string;
-  year: number;
-  color: string;
-  status: boolean;
-  buyValue: number;
+import { Vehicle } from './Vehicle';
+
+export type Car = Vehicle & {
   doorsQty: number;
   seatsQty: number;
 };
