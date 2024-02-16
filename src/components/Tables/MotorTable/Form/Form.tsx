@@ -51,15 +51,15 @@ export const Form = ({ motorData, handleInputChange }: FormProps) => {
       />
 
       <FormTextInput
-        title="Quantidade de Portas:"
-        name="doorsQty"
+        title="Categoria:"
+        name="category"
         value={motorData.category}
         handleInputChange={(e) => handleInputChange(e)}
       />
 
       <FormNumberInput
-        title="Quantidade de Assentos:"
-        name="seatsQty"
+        title="Cilindradas:"
+        name="engineCapacity"
         value={motorData.engineCapacity}
         handleInputChange={(e) => handleInputChange(e)}
       />
