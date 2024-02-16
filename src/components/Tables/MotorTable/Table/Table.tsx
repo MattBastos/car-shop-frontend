@@ -1,14 +1,29 @@
 'use client';
 
-import { useMotorData } from '@/hooks';
+import { useMotorData, useCreateMotor } from '@/hooks';
 import { useEffect } from 'react';
 
 import { TableContainer } from '../../CarTable/Table/styles';
+import { CreateVehicleButton } from '../../CreateVehicleButton';
+import { Modal } from '../../Modal';
+import { ModalButton } from '../../ModalButton';
+import { ModalButtonsContainer } from '../../ModalButtonsContainer';
 import { TableButton } from '../../TableButton';
+import { Form } from '../Form';
 import * as S from './styles';
 
 export const Table = () => {
   const { motorData, fetchData } = useMotorData();
+
+  const {
+    openCreateModal,
+    closeCreateModal,
+    isCreateModalOpen,
+    createMotorFormData,
+    handleChangeCreateInput,
+    onCreate,
+    isFormDataValid
+  } = useCreateMotor();
 
   const tableHeaders = [
     'Modelo',
@@ -27,7 +42,38 @@ export const Table = () => {
 
   return (
     <S.Container>
+      <S.CreateVehicleButtonContainer>
+        <CreateVehicleButton openModal={openCreateModal} title="Criar Moto" />
+      </S.CreateVehicleButtonContainer>
+
       <TableContainer>
+        <Modal
+          title="Criar Moto"
+          description="Preencha os dados abaixo para criar uma nova moto:"
+          isModalOpen={isCreateModalOpen}
+          closeModal={closeCreateModal}
+        >
+          <Form
+            motorData={createMotorFormData}
+            handleInputChange={handleChangeCreateInput}
+          />
+
+          <ModalButtonsContainer>
+            <ModalButton
+              onClick={onCreate}
+              title="Criar"
+              color="green"
+              isDisabled={isFormDataValid()}
+            />
+
+            <ModalButton
+              onClick={closeCreateModal}
+              title="Cancelar"
+              color="gray"
+            />
+          </ModalButtonsContainer>
+        </Modal>
+
         {motorData.length === 0 ? (
           <S.NoMotorMessage>Nenhua moto encontrado!</S.NoMotorMessage>
         ) : (
