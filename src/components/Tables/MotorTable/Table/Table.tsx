@@ -1,6 +1,6 @@
 'use client';
 
-import { useMotorData, useCreateMotor } from '@/hooks';
+import { useMotorData, useCreateMotor, useEditMotor } from '@/hooks';
 import { useEffect } from 'react';
 
 import { TableContainer } from '../../CarTable/Table/styles';
@@ -24,6 +24,16 @@ export const Table = () => {
     onCreate,
     isFormDataValid
   } = useCreateMotor();
+
+  const {
+    isEditModalOpen,
+    openEditModal,
+    closeEditModal,
+    selectedEditMotorData,
+    motorFormData,
+    handleChangeEditMotor,
+    onUpdate
+  } = useEditMotor();
 
   const tableHeaders = [
     'Modelo',
@@ -74,6 +84,28 @@ export const Table = () => {
           </ModalButtonsContainer>
         </Modal>
 
+        <Modal
+          title="Editar Moto"
+          description={`Preencha os dados abaixo para editar o veículo modelo ${selectedEditMotorData.model} ${selectedEditMotorData.year}:`}
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+        >
+          <Form
+            motorData={motorFormData}
+            handleInputChange={handleChangeEditMotor}
+          />
+
+          <ModalButtonsContainer>
+            <ModalButton onClick={onUpdate} title="Salvar" color="blue" />
+
+            <ModalButton
+              onClick={closeEditModal}
+              title="Cancelar"
+              color="gray"
+            />
+          </ModalButtonsContainer>
+        </Modal>
+
         {motorData.length === 0 ? (
           <S.NoMotorMessage>Nenhua moto encontrado!</S.NoMotorMessage>
         ) : (
@@ -111,7 +143,7 @@ export const Table = () => {
 
                   <S.TDActions>
                     <TableButton
-                      onClick={() => {}}
+                      onClick={() => openEditModal(motor)}
                       title="Editar"
                       color="blue"
                     />
