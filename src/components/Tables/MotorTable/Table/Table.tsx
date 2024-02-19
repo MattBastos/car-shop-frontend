@@ -1,6 +1,11 @@
 'use client';
 
-import { useMotorData, useCreateMotor, useEditMotor } from '@/hooks';
+import {
+  useMotorData,
+  useCreateMotor,
+  useEditMotor,
+  useDeleteMotor
+} from '@/hooks';
 import { useEffect } from 'react';
 
 import { TableContainer } from '../../CarTable/Table/styles';
@@ -34,6 +39,14 @@ export const Table = () => {
     handleChangeEditMotor,
     onUpdate
   } = useEditMotor();
+
+  const {
+    isDeleteModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+    selectedDeleteMotorData,
+    onDelete
+  } = useDeleteMotor();
 
   const tableHeaders = [
     'Modelo',
@@ -106,6 +119,27 @@ export const Table = () => {
           </ModalButtonsContainer>
         </Modal>
 
+        <Modal
+          title="Confirme sua Ação"
+          description={`Tem certeza que deseja deletar o veículo modelo ${selectedDeleteMotorData.model} ${selectedDeleteMotorData.year}?`}
+          isModalOpen={isDeleteModalOpen}
+          closeModal={closeDeleteModal}
+        >
+          <ModalButtonsContainer>
+            <ModalButton
+              onClick={() => onDelete()}
+              title="Deletar"
+              color="red"
+            />
+
+            <ModalButton
+              onClick={closeDeleteModal}
+              title="Cancelar"
+              color="gray"
+            />
+          </ModalButtonsContainer>
+        </Modal>
+
         {motorData.length === 0 ? (
           <S.NoMotorMessage>Nenhua moto encontrado!</S.NoMotorMessage>
         ) : (
@@ -149,7 +183,7 @@ export const Table = () => {
                     />
 
                     <TableButton
-                      onClick={() => {}}
+                      onClick={() => openDeleteModal(motor)}
                       title="Deletar"
                       color="red"
                     />
